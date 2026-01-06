@@ -295,31 +295,29 @@ function drawMaze(maze: Maze, ctx: CanvasRenderingContext2D, x1: number, y1: num
 			const right = (x1 + cellWidth * (c + 1)) | 0;
 			const top = (y1 + cellHeight * r) | 0;
 			const bottom = (y1 + cellHeight * (r + 1)) | 0;
+			ctx.beginPath();
+			ctx.moveTo(left, top);
 			if ((cell & CONNECT_TOP) === 0) {
-				ctx.beginPath();
-				ctx.moveTo(left, top);
 				ctx.lineTo(right, top);
-				ctx.stroke();
-			}
-			if ((cell & CONNECT_LEFT) === 0) {
-				ctx.beginPath();
-				ctx.moveTo(left, top);
-				ctx.lineTo(left, bottom);
-				ctx.stroke();
-			}
-			if ((cell & CONNECT_BOTTOM) === 0) {
-				ctx.beginPath();
-				ctx.moveTo(left, bottom);
-				ctx.lineTo(right, bottom);
-				ctx.stroke();
+			} else {
+				ctx.moveTo(right, top);
 			}
 			if ((cell & CONNECT_RIGHT) === 0) {
-				ctx.beginPath();
-				ctx.moveTo(right, top);
 				ctx.lineTo(right, bottom);
-				ctx.stroke();
+			} else {
+				ctx.moveTo(right, bottom);
 			}
-
+			if ((cell & CONNECT_BOTTOM) === 0) {
+				ctx.lineTo(left, bottom);
+			} else {
+				ctx.moveTo(left, bottom);
+			}
+			if ((cell & CONNECT_LEFT) === 0) {
+				ctx.lineTo(left, top);
+			} else {
+				ctx.moveTo(left, top);
+			}
+			ctx.stroke();
 		}
 	}
 }
