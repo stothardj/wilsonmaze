@@ -234,7 +234,6 @@ function generateMaze(width: number, height: number): Maze {
 			for (const d of deleted) {
 				cellColor.delete(maze.cellHash(d.row, d.col));
 			}
-			currPath.push(currPos, direction);
 			cellColor.set(currPosIdx, currColor);
 		} else {
 			// Connected to an existing path in the maze!
